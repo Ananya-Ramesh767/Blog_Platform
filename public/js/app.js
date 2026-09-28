@@ -32,6 +32,12 @@ async function api(path, { method = 'GET', body } = {}) {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
     if (res.status === 401 && state.token) logout(true);
+
+    if (data.errors) {
+      const messages = Object.values(data.errors);
+      throw new Error(messages.join('\n'));
+    }
+
     throw new Error(data.error || 'Something went wrong.');
   }
   return data;
@@ -183,7 +189,7 @@ async function editorView(id) {
     <form class="panel wide" id="pform" novalidate>
       <h1>${id ? 'Edit post' : 'Write a post'}</h1>
       <p class="sub">${id ? 'Update your story and save the changes.' : 'Share something worth reading.'}</p>
-      <label for="title">Title</label><input id="title" maxlength="140" value="${esc(post.title)}">
+      <label for="title">Title</label><input id="title" maxlength="300" value="${esc(post.title)}">
       <label for="content">Story</label><textarea id="content" class="big">${esc(post.content)}</textarea>
       <div id="err"></div>
       <div class="row"><a class="btn btn-ghost" href="${id ? '#/post/' + id : '#/'}">Cancel</a>
@@ -196,7 +202,10 @@ async function editorView(id) {
       const saved = await api(id ? '/posts/' + id : '/posts', { method: id ? 'PUT' : 'POST', body });
       toast(id ? 'Changes saved.' : 'Post published.');
       location.hash = '#/post/' + saved.id;
-    } catch (err) { document.getElementById('err').innerHTML = `<div class="error">${esc(err.message)}</div>`; }
+    } catch (err) {
+      document.getElementById('err').innerHTML =
+        `<div class="error">${esc(err.message).replace(/\n/g, '<br>')}</div>`;
+    }
   };
 }
 

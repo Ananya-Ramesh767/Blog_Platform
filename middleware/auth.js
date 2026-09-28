@@ -1,7 +1,6 @@
 // JWT helpers: sign tokens and protect routes.
 const jwt = require('jsonwebtoken');
-const SECRET = process.env.JWT_SECRET || 'change-this-secret-in-production';
-
+const SECRET = process.env.JWT_SECRET;
 const sign = (user) =>
   jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '7d' });
 

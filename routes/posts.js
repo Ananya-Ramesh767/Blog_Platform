@@ -22,14 +22,31 @@ router.get('/:id', (req, res) => {
 function validate(body) {
   const title = (body.title || '').trim();
   const content = (body.content || '').trim();
-  if (title.length < 3) return { error: 'Give your post a title (3+ characters).' };
-  if (content.length < 10) return { error: 'Write at least a couple of sentences.' };
+
+  const errors = {};
+
+  if (title.length < 3) {
+    errors.title = 'Title must be between 3 and 140 characters.';
+  } else if (title.length > 140) {
+    errors.title = 'Title must be between 3 and 140 characters.';
+  }
+
+  if (content.length < 10) {
+    errors.content = 'Story must be between 10 and 10,000 characters.';
+  } else if (content.length > 10000) {
+    errors.content = 'Story must be between 10 and 10,000 characters.';
+  }
+
+  if (Object.keys(errors).length > 0) {
+    return { errors };
+  }
+
   return { title, content };
 }
 
 router.post('/', requireAuth, (req, res) => {
   const v = validate(req.body);
-  if (v.error) return res.status(400).json(v);
+  if (v.errors) return res.status(400).json(v);
   const info = db.prepare('INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)')
     .run(req.user.id, v.title, v.content);
   res.status(201).json(db.prepare(`${SELECT} WHERE p.id = ?`).get(info.lastInsertRowid));

@@ -1,4 +1,5 @@
 // Entry point: REST API + static frontend.
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 
