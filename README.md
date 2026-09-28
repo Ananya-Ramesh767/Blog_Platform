@@ -3,9 +3,11 @@
 A full-stack blogging platform where users can register, log in, create and manage blog posts, and interact through comments — built to get hands-on experience with authentication, REST APIs, database integration, and content management.
 
 ## 🌐 Live Website
+# Blog Platform with Comments
 
-[Add your Render live website URL here]
+A full-stack blogging platform where users can register, log in, create posts, edit and delete posts, and interact through comments.
 
+ **Live Website:** https://blog-platform-nvre.onrender.com
 ## 🛠️ Tech Stack
 
 - Frontend: HTML, CSS, JavaScript
