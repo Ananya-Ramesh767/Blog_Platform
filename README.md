@@ -1,23 +1,66 @@
-# Inkwell – Blog Platform with Comments
+# Blog Platform with Comments
 
-Full-stack blog: Node.js + Express REST API, SQLite database, vanilla JS frontend.
+A full-stack blogging platform where users can register, log in, create and manage blog posts, and interact through comments — built to get hands-on experience with authentication, REST APIs, database integration, and content management.
 
-## Run
-    npm install
-    npm start
-Open http://localhost:3000
+## 🌐 Live Website
 
-## API
-| Method | Endpoint | Auth | Purpose |
-|---|---|---|---|
-| POST | /api/auth/register | – | Create account |
-| POST | /api/auth/login | – | Log in, returns JWT |
-| GET | /api/auth/me | ✔ | Current user |
-| GET | /api/posts?q= | – | List / search posts |
-| GET | /api/posts/:id | – | Single post |
-| POST | /api/posts | ✔ | Create post |
-| PUT | /api/posts/:id | ✔ owner | Edit post |
-| DELETE | /api/posts/:id | ✔ owner | Delete post |
-| GET | /api/posts/:id/comments | – | List comments |
-| POST | /api/posts/:id/comments | ✔ | Add comment |
-| DELETE | /api/comments/:id | ✔ author/post owner | Delete comment |
+[Add your Render live website URL here]
+
+## 🛠️ Tech Stack
+
+- Frontend: HTML, CSS, JavaScript
+- Backend: Node.js, Express.js
+- Authentication: JWT
+- Password Security: bcrypt
+- Database: SQLite
+- Environment Configuration: dotenv
+- API: RESTful APIs
+
+## ✨ Features
+
+- User registration and login
+- JWT-based user authentication
+- Secure password hashing with bcrypt
+- Create, edit, and delete blog posts
+- View published blog posts
+- Comment section for user interaction
+- Post validation with title and content limits
+- RESTful backend APIs
+- SQLite database integration
+- Protected routes for authenticated users
+- Environment variables for sensitive configuration
+
+## 📋 Task Requirements
+
+The project was developed to satisfy the following requirements:
+
+- User registration, login, and authentication
+- Create, edit, and delete blog posts
+- Comment section for user interaction
+- Backend with RESTful APIs and database integration
+
+## 📂 Project Structure
+
+```text
+blog-platform/
+│
+├── middleware/
+│   └── auth.js
+│
+├── public/
+│   ├── index.html
+│   ├── styles.css
+│   └── js/
+│       └── app.js
+│
+├── routes/
+│   ├── auth.js
+│   ├── posts.js
+│   └── comments.js
+│
+├── .env
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── server.js
+└── blog.db
